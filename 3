@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+#define MAX 100
+
+int stack[MAX];
+int top = -1;
+
+void push(int x) {
+    stack[++top] = x;
+}
+
+int pop() {
+    return stack[top--];
+}
+
+int main() 
+{
+    int arr[] = {4, 5, 2, 10, 8};
+    int n[5];   
+    int s = 5, i;
+    for(i = 0; i < s; i++) 
+    {
+
+        while(top != -1 && arr[i] > arr[stack[top]]) {
+            n[stack[top]] = arr[i];
+            pop();
+        }
+
+        push(i);
+    }
+    while(top != -1) {
+        n[stack[top]] = -1;
+        pop();
+    }
+    for(i = 0; i < s; i++) 
+    {
+        printf("%d -> %d\n", arr[i], n[i]);
+    }
+
+    return 0;
+}
